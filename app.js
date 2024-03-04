@@ -1,19 +1,13 @@
 const container = document.querySelector('.addToContainer');
+const pagination = document.querySelector('.pagination');
+const paginationP = document.createElement('p');
+
 let pageLimit = 20;
 let pageOffset = 0;
+let currentPage = 1;
 
 const nextButton = document.querySelector('.next');
 const prevButton = document.querySelector('.prev');
-
-nextButton.addEventListener('click', () => {
-    container.innerHTML = '';
-    pageOffset += pageLimit;
-});
-
-prevButton.addEventListener('click', () => {
-    container.innerHTML = '';
-    pageOffset -= pageLimit;
-});
 
 function fetchPokemons()
 {
@@ -39,21 +33,37 @@ function fetchPokemons()
             </div>
             `;
 
+            div.addEventListener('click', () => {
+                window.location.href = `pokemon.html?pokemonID=${pokemonID}`;
+            });
+
             container.appendChild(div);
         });
     });
 }
 
+function updatePagination()
+{
+    paginationP.innerHTML = `Page: ${currentPage}`;
+    paginationP.className = 'text-center py-4';
+    pagination.appendChild(paginationP);
+}
+
 nextButton.addEventListener('click', () => {
     container.innerHTML = '';
     pageOffset += pageLimit;
+    currentPage += 1;
+    updatePagination();
     fetchPokemons();
 });
 
 prevButton.addEventListener('click', () => {
     container.innerHTML = '';
     pageOffset -= pageLimit;
+    currentPage -= 1;
+    updatePagination();
     fetchPokemons();
 });
 
+updatePagination();
 fetchPokemons();
