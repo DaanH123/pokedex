@@ -19,8 +19,6 @@ function fetchPokemon()
         const abilities = pokemon.abilities;
         const cries = pokemon.cries;
 
-        const images = pokemon.sprites;
-
         let pokemonCries = "";
         let pokemonType = "";
         let pokemonAbilities = "";
