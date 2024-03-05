@@ -15,6 +15,7 @@ function fetchPokemons()
     .then(response => response.json())
     .then(data => {
         const pokemon = data.results;
+        
         pokemon.forEach(pokemon => {
             const pokemonName = pokemon.name;
             const pokemonUrl = pokemon.url;
