@@ -29,6 +29,7 @@ function fetchPokemon() {
             let pokemonType = "";
             let pokemonAbilities = "";
             let pokemontypeBackground = [];
+            let baseStats = '';
 
 
 
@@ -108,7 +109,7 @@ function fetchPokemon() {
             });
 
             //Loop door de stats heen en maak een div aan met de stats en geef ze een kleur op basis van de base_stat
-            const baseStats = pokemon.stats.map(stat => {
+            pokemon.stats.forEach(stat => {
                 let statClass = '';
                 if (stat.base_stat <= 40 || stat.base_stat <= 50) {
                     statClass = "bg-red-500";
@@ -119,8 +120,8 @@ function fetchPokemon() {
                 } else if (stat.base_stat >= 100) {
                     statClass = "bg-fuchsia-900";
                 }
-                return `<span class="${statClass} block md:flex my-2 rounded-xl p-3">${stat.stat.name}: ${stat.base_stat}</span>`;
-            }).join(' ');
+                baseStats += `<span class="${statClass} block md:flex my-2 rounded-xl p-3">${stat.stat.name}: ${stat.base_stat}</span> `;
+            });
 
             //Loop door de cries heen en maak een audio element aan met de source van de cry
             Object.keys(cries).forEach((key) => {
@@ -196,7 +197,7 @@ function fetchPokemon() {
 nextButton.addEventListener('click', () => {
     container.innerHTML = '';
     pokemonID++;
-    history.pushState({}, '', `?pokemonID=${pokemonID}`);
+    window.location.href = `pokemon.html?pokemonID=${pokemonID}`;
     fetchPokemon();
 });
 
@@ -204,7 +205,7 @@ nextButton.addEventListener('click', () => {
 prevButton.addEventListener('click', () => {
     container.innerHTML = '';
     pokemonID--;
-    history.pushState({}, '', `?pokemonID=${pokemonID}`);
+    window.location.href = `pokemon.html?pokemonID=${pokemonID}`;
     fetchPokemon();
 });
 
