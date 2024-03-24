@@ -20,6 +20,7 @@ function fetchPokemon() {
             const abilities = pokemon.abilities;
             const cries = pokemon.cries;
             const types = pokemon.types;
+            const stats = pokemon.stats;
 
             //Haal het id op en format het voor de externe image
             const external_pokemonid = formatPokemonID(pokemonID);
@@ -109,7 +110,7 @@ function fetchPokemon() {
             });
 
             //Loop door de stats heen en maak een div aan met de stats en geef ze een kleur op basis van de base_stat
-            pokemon.stats.forEach(stat => {
+            stats.forEach(stat => {
                 let statClass = '';
                 if (stat.base_stat <= 40 || stat.base_stat <= 50) {
                     statClass = "bg-red-500";
